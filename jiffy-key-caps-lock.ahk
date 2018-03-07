@@ -1,4 +1,9 @@
 /*
+ ROB TO DO:
+
+ have app switcher, like CapsLock + tab - be Alt-Tab
+ have Caps Lock + M  be windows M - minimize
+
 
 Use Caps Lock for Hand-Friendly Text Navigation
 
@@ -35,7 +40,7 @@ Template script (you can customize this template by editing ShellNewTemplate.ahk
 
     Backspace simulates Delete
 
-    b cut
+    x cut
 
     c copy
 
@@ -55,7 +60,22 @@ Template script (you can customize this template by editing ShellNewTemplate.ahk
 
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 
+OnMessage(0x44, "OnMsgBox")
+MsgBox 0x40080, Jiffy Keys , Welcome!, 2
+OnMessage(0x44, "")
 
+IfMsgBox Timeout, {
+
+}
+
+OnMsgBox() {
+    DetectHiddenWindows, On
+    Process, Exist
+    If (WinExist("ahk_class #32770 ahk_pid " . ErrorLevel)) {
+        hIcon := LoadPicture("imageres.dll", "w32 Icon140", _)
+        SendMessage 0x172, 1, %hIcon% , Static1 ;STM_SETIMAGE
+    }
+}
 
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
@@ -220,10 +240,13 @@ CapsLock & r::Send ^r
 CapsLock & c::Send ^c
 
 CapsLock & v::Send ^v
+CapsLock & z::Send ^z
+CapsLock & y::Send ^y  ; redo in some programs.
 
 ; maybe add a kehy to select all copy and paste ??? not sure
 CapsLock & a::Send ^a
 
+CapsLock & t::Send ^t   ; just like Ctrl-tab for New Tabss
 
 
 ;Prevents CapsState-Shifting
