@@ -1,6 +1,7 @@
 /*
  ROB TO DO:
 
+- maybe < and > to do word at a time, and shift too.
  have app switcher , like CapsLock + tab - be Alt-Tab
 
 
@@ -242,8 +243,9 @@ return
 
 
 
-CapsLock & BS::Send,{Del}
+CapsLock & BS::Send,{Del}  
 
+CapsLock & s::Send ^s   ; save
 CapsLock & x::Send ^x
 CapsLock & w::Send ^w
 CapsLock & r::Send ^r
@@ -262,6 +264,13 @@ CapsLock & t::Send ^t   ; just like Ctrl-tab for New Tabss
 CapsLock & m::Send #m   ; windows min.
 CapsLock & e::Send #e   ; windows min.
 CapsLock & d::Send #d   ; windows desktop toggle.
+
+
+CapsLock & Up::Send {Volume_Up}
+CapsLock & Down::Send {Volume_Down}
+CapsLock & Left::Send {Volume_Mute}
+CapsLock & Right::Send {Volume_Mute}
+
 
 ;Prevents CapsState-Shifting
 
