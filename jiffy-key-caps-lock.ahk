@@ -60,6 +60,8 @@ Template script (you can customize this template by editing ShellNewTemplate.ahk
 
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 
+
+SoundBeep  ; Play the default pitch and duration.
 OnMessage(0x44, "OnMsgBox")
 MsgBox 0x40080, Jiffy Keys , Welcome!, 2
 OnMessage(0x44, "")
@@ -243,7 +245,7 @@ return
 
 
 
-CapsLock & BS::Send,{Del}  
+CapsLock & BS::Send,{Del}
 
 CapsLock & s::Send ^s   ; save
 CapsLock & x::Send ^x
@@ -264,12 +266,16 @@ CapsLock & t::Send ^t   ; just like Ctrl-tab for New Tabss
 CapsLock & m::Send #m   ; windows min.
 CapsLock & e::Send #e   ; windows min.
 CapsLock & d::Send #d   ; windows desktop toggle.
+CapsLock & f::Send ^f   ; windows desktop toggle.
 
 
 CapsLock & Up::Send {Volume_Up}
 CapsLock & Down::Send {Volume_Down}
 CapsLock & Left::Send {Volume_Mute}
 CapsLock & Right::Send {Volume_Mute}
+
+
+CapsLock & \::Send {Enter}
 
 
 ;Prevents CapsState-Shifting
