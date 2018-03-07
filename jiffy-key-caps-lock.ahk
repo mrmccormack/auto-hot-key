@@ -1,7 +1,7 @@
 /*
  ROB TO DO:
 
- have app switcher, like CapsLock + tab - be Alt-Tab
+ have app switcher , like CapsLock + tab - be Alt-Tab
 
 
 Use Caps Lock for Hand-Friendly Text Navigation
@@ -122,11 +122,11 @@ CapsLock & j::
 
        if getkeystate("Shift") = 0
 
-               Send,{Left}
+               Send,{left}
 
        else
 
-               Send,+{Left}
+               Send,+{left}
 
 return
 
@@ -178,11 +178,11 @@ CapsLock & u::
 
        if getkeystate("Shift") = 0
 
-               Send,{Home}
+               Send,{PgUp}
 
        else
 
-               Send,+{Home}
+               Send,+{PgUp}
 
 return
 
@@ -192,11 +192,11 @@ CapsLock & o::
 
        if getkeystate("Shift") = 0
 
-               Send,{End}
+               Send,{PgDn}
 
        else
 
-               Send,+{End}
+               Send,+{PgDn}
 
 return
 
@@ -206,11 +206,23 @@ CapsLock & H::
 
        if getkeystate("Shift") = 0
 
-               Send,^{Left}
+               Send,^{Home}
 
        else
 
-               Send,+^{Left}
+               Send,+^{Home}
+
+return
+
+CapsLock & '::
+
+       if getkeystate("Shift") = 0
+
+               Send,^{End}
+
+       else
+
+               Send,+^{End}
 
 return
 
