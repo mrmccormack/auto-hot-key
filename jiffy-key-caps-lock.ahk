@@ -231,20 +231,24 @@ return
 
 
 
-       CapsLock & SC027::                                  ;has to be changed (depending on the keyboard-layout)
+;       CapsLock & SC027::                                  ;has to be changed (depending on the keyboard-layout);
+;
+;               if getkeystate("Shift") = 0
+;
+;                       Send,^{Right}
+;
+;               else
+;
+;                       Send,+^{Right}
+;
+;       return
 
-               if getkeystate("Shift") = 0
 
-                       Send,^{Right}
-
-               else
-
-                       Send,+^{Right}
-
-       return
-
-
-
+;; try to just Ctrl
+;; no workCapsLock::Send,{Control}
+; ^#`;::Send, ^{end} ; thats how you send a semi colon
+^#`;::Send, ^{end} ; thats how you send a semi colon
+CapsLock & `;::Send, {Enter} ; thats how you send a semi colon
 CapsLock & BS::Send,{Del}
 
 CapsLock & s::Send ^s   ; save
@@ -266,7 +270,12 @@ CapsLock & t::Send ^t   ; just like Ctrl-tab for New Tabss
 CapsLock & m::Send #m   ; windows min.
 CapsLock & e::Send #e   ; windows min.
 CapsLock & d::Send #d   ; windows desktop toggle.
-CapsLock & f::Send ^f   ; windows desktop toggle.
+CapsLock & f::Send ^f   ; find
+
+; symbols
+CapsLock & 4::Send ©
+CapsLock & 1::Run, http://www.google.com ; i.e. any URL can be launched.
+CapsLock & 3::Run, atom ; i.e. any URL can be launched.
 
 
 CapsLock & Up::Send {Volume_Up}
@@ -286,29 +295,41 @@ CapsLock & Space::Send,{Space}
 
 +Capslock::SetCapsLockState, On
 
+
+CapsLock & PrintScreen::LaunchSnippingTool()
+
+LaunchSnippingTool()
+{
+	IfWinExist , Snipping Tool
+	{
+		WinActivate , Snipping Tool
+		Send ^+n
+	} else {
+	  Run, C:\Windows\explorer.exe C:\Windows\system32\SnippingTool.exe
+		WinWait , Snipping Tool
+		WinActivate , Snipping Tool
+		Send ^+n
+	}
+
+}
+
+
 /*
 
 Rob McCormack's mods
 
 */
 
-; search google for selected text
+; search google for selected text.
 CapsLock & g::
 {
 Send, ^c
-
-InputBox, UserInput, Search Google for: %clipboard% and: ,enter additional search term, , 240, 240
-;if ErrorLevel
-    ;MsgBox, CANCEL was pressed.
-;else
-    ;MsgBox, You entered "%UserInput%"
-
-
 Sleep 50
-Run, http://www.google.com/search?q=%clipboard% %UserInput%
+InputBox, OutputVar, Jiffy Keys, Add to clipboard contents "%Clipboard%", , , , , , , ,
+Word := Trim(Clipboard)
+Run, http://www.google.com/search?q=%Word% + %OutputVar%
 Return
 }
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
