@@ -37,7 +37,8 @@ if (ProgID = "FirefoxURL")
 ; HOTKEYS
 ;{-----------------------------------------------
 ;
-#g::    ; <-- Google Search Using Highlighted Text
+; #g::    ; <-- Google Search Using Highlighted Text
+CapsLock & g::   ; hot key
     Save_Clipboard := ClipboardAll
     Clipboard := ""
     Send ^c

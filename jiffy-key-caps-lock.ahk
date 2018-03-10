@@ -248,7 +248,7 @@ return
 ;; no workCapsLock::Send,{Control}
 ; ^#`;::Send, ^{end} ; thats how you send a semi colon
 ^#`;::Send, ^{end} ; thats how you send a semi colon
-CapsLock & `;::Send, {Enter} ; thats how you send a semi colon
+CapsLock & `;::Send, {end} ; thats how you send a semi colon
 CapsLock & BS::Send,{Del}
 
 CapsLock & s::Send ^s   ; save
@@ -325,7 +325,19 @@ CapsLock & g::
 {
 Send, ^c
 Sleep 50
-InputBox, OutputVar, Jiffy Keys, Add to clipboard contents "%Clipboard%", , , , , , , ,
+
+StringLen, Length, %Clipboard%
+
+if %Length% < 4
+  %Clipboard% = ""
+;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]
+InputBox, OutputVar, Jiffy Keys, Add to clipboard contents "%Clipboard%", , , , , , , ,%Clipboard%
+if ErrorLevel
+    ;MsgBox, CANCEL was pressed.
+    Return
+else
+    MsgBox, You entered "%OutputVar%"
+
 Word := Trim(Clipboard)
 Run, http://www.google.com/search?q=%Word% + %OutputVar%
 Return
