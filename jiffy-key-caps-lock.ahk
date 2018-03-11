@@ -227,17 +227,18 @@ return
 
 
 
-CapsLock & H::
+CapsLock & h::
 
        if getkeystate("Shift") = 0
 
-               Send,^{Home}
+               Send,{Home}
 
        else
 
-               Send,+^{Home}
+               Send,+{Home}
 
 return
+
 
 CapsLock & '::
 
@@ -269,7 +270,8 @@ return
 ;; try to just Ctrl
 ;; no workCapsLock::Send,{Control}
 ; ^#`;::Send, ^{end} ; thats how you send a semi colon
-^#`;::Send, ^{end} ; thats how you send a semi colon
+; ^#`;::Send, ^{end} ; thats how you send a semi colon
+
 CapsLock & `;::Send, {end} ; thats how you send a semi colon
 CapsLock & BS::Send,{Del}
 
@@ -319,7 +321,7 @@ CapsLock & \::Send {Enter}
 ; convient Enter on Notebook
 CapsLock & Space::Send {Enter}
 
-; CapsLock by itself is |ENTER 
+; CapsLock by itself is |ENTER
 CapsLock::Send {Enter}
 
 ; two fast CapsLock is enter
