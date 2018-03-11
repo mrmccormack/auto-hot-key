@@ -239,6 +239,19 @@ CapsLock & h::
 
 return
 
+CapsLock & `;::   ;     ; thats how you send a semi colon
+
+
+       if getkeystate("Shift") = 0
+
+               Send,{End}
+
+       else
+
+               Send,+{End}
+
+return
+
 
 CapsLock & '::
 
@@ -272,7 +285,7 @@ return
 ; ^#`;::Send, ^{end} ; thats how you send a semi colon
 ; ^#`;::Send, ^{end} ; thats how you send a semi colon
 
-CapsLock & `;::Send, {end} ; thats how you send a semi colon
+
 CapsLock & BS::Send,{Del}
 
 CapsLock & s::Send ^s   ; save
@@ -322,13 +335,13 @@ CapsLock & \::Send {Enter}
 CapsLock & Space::Send {Enter}
 
 ; CapsLock by itself is |ENTER
-CapsLock::Send {Enter}
+; NOT A GOOD IDEA CapsLock::Send {Enter}
 
 ; two fast CapsLock is enter
 lastShift := 0
 
 
-/*example of double click
+;example of double click
 $Capslock::
 if ((A_TickCount - lastShift) <= 250)
 	Send {Enter}
@@ -336,7 +349,7 @@ else
 	Send {Shift}
 lastShift := A_TickCount
 return
-*/
+
 
 ;Prevents CapsState-Shifting
 
