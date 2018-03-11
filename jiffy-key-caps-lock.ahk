@@ -313,9 +313,8 @@ return
 
 
 ; symbols
-CapsLock & 4::Send ©
-CapsLock & 1::Run, http://www.google.com ; i.e. any URL can be launched.
-CapsLock & 3::Run, atom ; i.e. any URL can be launched.
+
+CapsLock & 1::Run, http://www.google.com ;
 
 
 CapsLock & Up::Send {Volume_Up}
