@@ -4,6 +4,8 @@
 - maybe < and > to do word at a time, and shift too.
  have app switcher , like CapsLock + tab - be Alt-Tab
 
+ - add markdown feature- ref: https://github.com/koepalex/autohotkey-markdown/blob/master/markdown.ahkF
+
 
 Use Caps Lock for Hand-Friendly Text Navigation
 
@@ -272,6 +274,14 @@ CapsLock & e::Send #e   ; windows min.
 CapsLock & d::Send #d   ; windows desktop toggle.
 CapsLock & f::Send ^f   ; find
 
+
+; date and time insert
+CapsLock & /::
+FormatTime, time, A_now, ddd d-MMM-yy hh:mm tt
+send %time%
+return
+
+
 ; symbols
 CapsLock & 4::Send ©
 CapsLock & 1::Run, http://www.google.com ; i.e. any URL can be launched.
@@ -298,6 +308,34 @@ CapsLock & Space::Send,{Space}
 
 CapsLock & PrintScreen::LaunchSnippingTool()
 
+
+; ***** HOTSTRINGS *****************
+
+::btw::
+MsgBox You typed "btw".
+return
+
+:*:.ram::rob.a.mccormack@gmail.com
+:*:.rpc::ReadPlease Corporation
+:*:.ty::Thanks for your email.
+:*:.copy::{ASC 0169}
+:*:.up::{U+2192}
+
+:*:.today::  ; This hotstring replaces "]d" with the current date and time via the commands below.
+;FormatTime, CurrentDateTime,, M/d/yyyy h:mm tt  ; It will look like 9/1/2005 3:53 PM
+FormatTime, CurrentDateTime, A_now, ddd d-MMM-yy hh:mm tt
+SendInput %CurrentDateTime%
+return
+
+::!text::
+(
+Any text between the top and bottom parentheses is treated literally, including commas and percent signs.
+By default, the hard carriage return (Enter) between the previous line and this one is also preserved.
+    By default, the indentation (tab) to the left of this line is preserved.
+
+See continuation section for how to change these default behaviors.
+)
+
 LaunchSnippingTool()
 {
 	IfWinExist , Snipping Tool
@@ -323,23 +361,26 @@ Rob McCormack's mods
 ; search google for selected text.
 CapsLock & g::
 {
-Send, ^c
+; Send, ^c
+Send, {ctrl down}c{ctrl up} ; More secure way to Copy things
 Sleep 50
 
-StringLen, Length, %Clipboard%
+StringLen, Length, Clipboard
 
-if %Length% < 4
-  %Clipboard% = ""
+;MsgBox, You clipboard "%Length%"
+
+if (Length < 4)
+    Clipboard := ""
 ;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]
-InputBox, OutputVar, Jiffy Keys, Add to clipboard contents "%Clipboard%", , , , , , , ,%Clipboard%
+InputBox, OutputVar, Jiffy Keys, Add to clipboard contents `n %Clipboard%, , , , , , , 15 ,%Clipboard%
 if ErrorLevel
     ;MsgBox, CANCEL was pressed.
     Return
 else
-    MsgBox, You entered "%OutputVar%"
+    ;MsgBox, You entered "%OutputVar%"
 
 Word := Trim(Clipboard)
-Run, http://www.google.com/search?q=%Word% + %OutputVar%
+Run, http://www.google.com/search?q=%OutputVar%
 Return
 }
 
