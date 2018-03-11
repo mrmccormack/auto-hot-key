@@ -2,10 +2,11 @@
 
 
 Symbol	Description
-#	Win (Windows logo key)
-!	Alt
-^	Control
-+	Shift
+!n::Run Notepad ; this means Alt+n
+^n::Run Notepad ; this means Ctrl+n
++n::Run Notepad ; this means Shift+n
+#n::Run Notepad ; this means the Win+n
+
 &	An ampersand may be used between any two keys or mouse buttons to combine them into a custom hotkey.
 
 
@@ -77,8 +78,12 @@ Template script (you can customize this template by editing ShellNewTemplate.ahk
 
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 
+Menu, Tray, Icon, jiffykeys.ico ; this changes the tray icon to a little keyboard!
+;SoundBeep  ; Play the default pitch and duration.
 
-SoundBeep  ; Play the default pitch and duration.
+
+SoundPlay, %A_WinDir%\Media\ding.wav
+SoundPlay *-1  ; Simple beep. If the sound card is not available, the sound is generated using the speaker.
 OnMessage(0x44, "OnMsgBox")
 MsgBox 0x40080, Jiffy Keys , Welcome!, 2
 OnMessage(0x44, "")
@@ -314,9 +319,14 @@ CapsLock & \::Send {Enter}
 ; convient Enter on Notebook
 CapsLock & Space::Send {Enter}
 
+; CapsLock by itself is |ENTER 
+CapsLock::Send {Enter}
+
 ; two fast CapsLock is enter
 lastShift := 0
 
+
+/*example of double click
 $Capslock::
 if ((A_TickCount - lastShift) <= 250)
 	Send {Enter}
@@ -324,7 +334,7 @@ else
 	Send {Shift}
 lastShift := A_TickCount
 return
-
+*/
 
 ;Prevents CapsState-Shifting
 
@@ -344,11 +354,14 @@ CapsLock & PrintScreen::LaunchSnippingTool()
 MsgBox You typed "btw".
 return
 
-:*:.ram::rob.a.mccormack@gmail.com
-:*:.rpc::ReadPlease Corporation
-:*:.ty::Thanks for your email.
-:*:.copy::{ASC 0169}
-:*:.up::{U+2192}
+; use of semicolons for short cut keys
+:*:`;ram::rob.a.mccormack@gmail.com
+:*:`;rpc::ReadPlease Corporation
+:*:`;ty::Thanks for your email.
+:*:`;copy::{ASC 0169}
+:*:`;up::{U+2192}
+:*:`;down::{U+2193}
+
 
 :*:.today::  ; This hotstring replaces "]d" with the current date and time via the commands below.
 ;FormatTime, CurrentDateTime,, M/d/yyyy h:mm tt  ; It will look like 9/1/2005 3:53 PM
