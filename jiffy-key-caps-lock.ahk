@@ -273,7 +273,15 @@ CapsLock & BS::Send,{Del}
 CapsLock & F4::Send,!{F4}
 
 
-CapsLock & Escape::SetCapsLockState, AlwaysOff  ; needed or cap-esc will toggle state of CapsLock
+CapsLock & Escape::
+  {
+    SetCapsLockState, AlwaysOff  ; needed or cap-esc will toggle state of CapsLock
+    Run, taskmgr,, Min   ; run taskmanager
+  }
+
+!y::Run, taskmgr,, Min
+
+
 CapsLock & s::Send ^s   ; save
 CapsLock & x::Send ^x
 CapsLock & w::Send ^w
@@ -312,8 +320,11 @@ CapsLock & 3::Run, atom ; i.e. any URL can be launched.
 
 CapsLock & Up::Send {Volume_Up}
 CapsLock & Down::Send {Volume_Down}
-CapsLock & Left::Send {Volume_Mute}
-CapsLock & Right::Send {Volume_Mute}
+CapsLock & Left::Send {Media_Prev}
+CapsLock & Right::Send {Media_Next}
+CapsLock & RShift::Send {Media_Play_Pause}
+
+
 
 
 CapsLock & \::Send {Enter}
