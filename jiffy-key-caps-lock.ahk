@@ -1,5 +1,7 @@
 /*
 
+fixes:
+- CapsLock + Esc  forced all caps all the time- but is a TOGGLE - why?
 
 Symbol	Description
 !n::Run Notepad ; this means Alt+n
@@ -80,106 +82,87 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 
 Menu, Tray, Icon, jiffykeys.ico ; this changes the tray icon to a little keyboard!
 ;SoundBeep  ; Play the default pitch and duration.
-
-
 SoundPlay, %A_WinDir%\Media\ding.wav
 SoundPlay *-1  ; Simple beep. If the sound card is not available, the sound is generated using the speaker.
+
 OnMessage(0x44, "OnMsgBox")
 MsgBox 0x40080, Jiffy Keys , Welcome!, 2
 OnMessage(0x44, "")
 
 IfMsgBox Timeout, {
-
 }
 
 OnMsgBox() {
-    DetectHiddenWindows, On
-    Process, Exist
-    If (WinExist("ahk_class #32770 ahk_pid " . ErrorLevel)) {
-        hIcon := LoadPicture("imageres.dll", "w32 Icon140", _)
-        SendMessage 0x172, 1, %hIcon% , Static1 ;STM_SETIMAGE
-    }
+  DetectHiddenWindows, On
+  Process, Exist
+  If (WinExist("ahk_class #32770 ahk_pid " . ErrorLevel))
+  {
+    hIcon := LoadPicture("imageres.dll", "w32 Icon140", _)
+    SendMessage 0x172, 1, %hIcon% , Static1 ;STM_SETIMAGE
+  }
 }
+
+
+; HELP FILE
+CapsLock & F1::
+    Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --app="C:\Users\Rob Acer Aspire 3\Documents\GitHub\auto-hot-key\keyboardfonts.html"
+    Return
+;C:\Users\Rob Acer Aspire 3>"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --app="C:\Users\Rob Acer Aspire 3\Documents\GitHub\auto-hot-key\keyboardfonts.html"
 
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-
-
 SetCapsLockState, AlwaysOff
 
-
-
 CapsLock & i::
-
-       if getkeystate("Shift") = 0
-
-                        {
-
-                        Send,{Up}
-
-                        }
-
-       else           {
-
-               Send,+{Up}
-
-                        }
-
+if getkeystate("Shift") = 0
+  Send,{Up}
+else
+  Send,+{Up}
 return
-
-
-
-CapsLock & l::
-
-       if getkeystate("Shift") = 0
-
-               Send,{Right}
-
-       else
-
-               Send,+{Right}
-
-return
-
-
 
 CapsLock & j::
-
-       if getkeystate("Shift") = 0
-
-               Send,{left}
-
-       else
-
-               Send,+{left}
-
+  if getkeystate("Shift") = 0
+    Send,{left}
+  else
+    Send,+{left}
 return
-
-
 
 CapsLock & k::
-
-       if getkeystate("Shift") = 0
-
-               Send,{Down}
-
-       else
-
-               Send,+{Down}
-
+  if getkeystate("Shift") = 0
+    Send,{Down}
+  else
+    Send,+{Down}
 return
 
+CapsLock & l::
+  if getkeystate("Shift") = 0
+    Send,{Right}
+  else
+    Send,+{Right}
+return
 
-
+; < for HOME, very top
 CapsLock & ,::
 
        if getkeystate("Shift") = 0
 
-               Send,^{Down}
+               Send,^{Home}
 
        else
 
-               Send,+^{Down}
+               Send,+^{Home}
+
+return
+; > for END, very end
+CapsLock & .::
+
+       if getkeystate("Shift") = 0
+
+               Send,^{End}
+
+       else
+
+               Send,+^{End}
 
 return
 
@@ -287,7 +270,10 @@ return
 
 
 CapsLock & BS::Send,{Del}
+CapsLock & F4::Send,!{F4}
 
+
+CapsLock & Escape::SetCapsLockState, AlwaysOff  ; needed or cap-esc will toggle state of CapsLock
 CapsLock & s::Send ^s   ; save
 CapsLock & x::Send ^x
 CapsLock & w::Send ^w
@@ -303,6 +289,7 @@ CapsLock & y::Send ^y  ; redo in some programs.
 CapsLock & a::Send ^a
 
 CapsLock & t::Send ^t   ; just like Ctrl-tab for New Tabss
+CapsLock & n::Send ^n   ; New Documnet
 
 CapsLock & m::Send #m   ; windows min.
 CapsLock & e::Send #e   ; windows min.
@@ -357,7 +344,7 @@ return
 
 *Capslock::SetCapsLockState, AlwaysOff
 
-+Capslock::SetCapsLockState, On
+; this was causing all the trouble, so remove it+Capslock::SetCapsLockState, On
 
 
 CapsLock & PrintScreen::LaunchSnippingTool()
