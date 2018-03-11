@@ -1,4 +1,19 @@
 /*
+
+
+Symbol	Description
+#	Win (Windows logo key)
+!	Alt
+^	Control
++	Shift
+&	An ampersand may be used between any two keys or mouse buttons to combine them into a custom hotkey.
+
+
+*/
+
+
+
+/*
  ROB TO DO:
 
 - maybe < and > to do word at a time, and shift too.
@@ -296,10 +311,24 @@ CapsLock & Right::Send {Volume_Mute}
 
 CapsLock & \::Send {Enter}
 
+; convient Enter on Notebook
+CapsLock & Space::Send {Enter}
+
+; two fast CapsLock is enter
+lastShift := 0
+
+$Capslock::
+if ((A_TickCount - lastShift) <= 250)
+	Send {Enter}
+else
+	Send {Shift}
+lastShift := A_TickCount
+return
+
 
 ;Prevents CapsState-Shifting
 
-CapsLock & Space::Send,{Space}
+;CapsLock & Space::Send,{Space}
 
 *Capslock::SetCapsLockState, AlwaysOff
 
