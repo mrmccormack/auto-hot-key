@@ -115,15 +115,6 @@ else
   Send,+^{End
 return
 
-
-
-CapsLock & 8::
-if getkeystate("Shift") = 0
-  Send,^{Up}
-else
-  Send,+^{Up}
-return
-
 CapsLock & u::
 if getkeystate("Shift") = 0
   Send,{PgUp}
@@ -153,25 +144,17 @@ else
 return
 
 
-CapsLock & '::
-if getkeystate("Shift") = 0
-  Send,^{End}
-else
-  Send,+^{End}
-return
-
 ; ----------------------Other Keys----------------------------------------------
 CapsLock & BS::Send,{Del}
-CapsLock & F4::Send,!{F4}
+CapsLock & F4::Send,!{F4}  ; Alt-F4 close
 
 CapsLock & Escape::
   {
     SetCapsLockState, AlwaysOff  ; needed or cap-esc will toggle state of CapsLock
-    Run, taskmgr,, Min   ; run taskmanager
+    Run, taskmgr,,   ; run taskmanager
   }
 
   ; ----------------------Remap Control Key----------------------------------------------
-
 CapsLock & s::Send ^s   ; save
 CapsLock & x::Send ^x
 CapsLock & w::Send ^w
@@ -218,7 +201,6 @@ CapsLock & Space::Send {Enter}
 ; NOT A GOOD IDEA CapsLock::Send {Enter}
 ; two fast CapsLock is enter
 lastShift := 0
-
 
 ; ----------------------Double Click-------------------------------------------------
 
