@@ -11,7 +11,8 @@ Symbol	Description
 
 &	An ampersand may be used between any two keys or mouse buttons to combine them into a custom hotkey.
 
- ROB TO DO:
+ # ROB TO DO:
+- add a button to MsgBox to search google within last year
 - have app switcher , like CapsLock + tab - be Alt-Tab
 - add markdown feature- ref: https://github.com/koepalex/autohotkey-markdown/blob/master/markdown.ahkF
 - httplifehacker.com5277383use-caps-lock-for-hand+friendly-text-navigation
@@ -33,7 +34,7 @@ SoundPlay *-1  ; Simple beep. If the sound card is not available, the sound is g
 
 ; Splash Screen
 OnMessage(0x44, "OnMsgBox")
-MsgBox 0x40080, Jiffy Keys , Welcome!, 2
+MsgBox 0x40080, Jiffy Keys , Welcome! `n version: 0.1, 2
 OnMessage(0x44, "")
 
 IfMsgBox Timeout, {
@@ -200,26 +201,6 @@ CapsLock & '::
                Send,+^{End}
 
 return
-
-
-
-;       CapsLock & SC027::                                  ;has to be changed (depending on the keyboard-layout);
-;
-;               if getkeystate("Shift") = 0
-;
-;                       Send,^{Right}
-;
-;               else
-;
-;                       Send,+^{Right}
-;
-;       return
-
-
-;; try to just Ctrl
-;; no workCapsLock::Send,{Control}
-; ^#`;::Send, ^{end} ; thats how you send a semi colon
-; ^#`;::Send, ^{end} ; thats how you send a semi colon
 
 ; ----------------------Other Keys----------------------------------------------
 CapsLock & BS::Send,{Del}
