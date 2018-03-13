@@ -1,7 +1,7 @@
-/* -----------------------------------------------------------------------------
---------------------------- JiffyKeys-------------------------------------------
---------------------------------------------------------------------------------
-             CapsLock for navigation and SetCapsLockState
+/*
+
+fixes:
+- CapsLock + Esc  forced all caps all the time- but is a TOGGLE - why?
 
 Symbol	Description
 !n::Run Notepad ; this means Alt+n
@@ -11,27 +11,80 @@ Symbol	Description
 
 &	An ampersand may be used between any two keys or mouse buttons to combine them into a custom hotkey.
 
- ROB TO DO:
-- have app switcher , like CapsLock + tab - be Alt-Tab
-- add markdown feature- ref: https://github.com/koepalex/autohotkey-markdown/blob/master/markdown.ahkF
-- httplifehacker.com5277383use-caps-lock-for-hand+friendly-text-navigation
-- Originally written by Philipp Otto, Germany
 
-HELP Files
-- Press CapsLock + F1 for all Keys
 */
-;-------------------------------------------------------------------------------
+
+
+
+/*
+ ROB TO DO:
+
+- maybe < and > to do word at a time, and shift too.
+ have app switcher , like CapsLock + tab - be Alt-Tab
+
+ - add markdown feature- ref: https://github.com/koepalex/autohotkey-markdown/blob/master/markdown.ahkF
+
+
+Use Caps Lock for Hand-Friendly Text Navigation
+
+httplifehacker.com5277383use-caps-lock-for-hand+friendly-text-navigation
+
+Written by Philipp Otto, GermanyKK
+Script Function
+
+Template script (you can customize this template by editing ShellNewTemplate.ahk in your Windows folder)
+
+
+
+    Normal usage with capslock as a modifier
+
+    j left
+
+    k down
+
+    l right
+
+    i up
+
+    h simulates CTRL+left (jumps to the next word)
+
+    ; simulates CTRL+right
+
+    , simulates CTRL+Down
+
+    8 simulates CTRL+Up
+
+    u simulates Home (jumps to the beginning of the current line) (i forgot to mention this in my comment)
+
+    o simulates End
+
+    Backspace simulates Delete
+
+    x cut
+
+    c copy
+
+    v paste
+
+
+
+    If you keep pressing "Shift" in addition to Capslock it works as if you are pressing Shift — you highlight the text. Shift + Capslock activates the actual Capslock functionality (normal capslock-hitting deactivates it again).
+
+
+
+*/
+
+
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 
-; this changes the tray icon to a little keyboard!
-Menu, Tray, Icon, jiffykeys.ico
+Menu, Tray, Icon, jiffykeys.ico ; this changes the tray icon to a little keyboard!
 ;SoundBeep  ; Play the default pitch and duration.
 SoundPlay, %A_WinDir%\Media\ding.wav
 SoundPlay *-1  ; Simple beep. If the sound card is not available, the sound is generated using the speaker.
 
-; Splash Screen
 OnMessage(0x44, "OnMsgBox")
 MsgBox 0x40080, Jiffy Keys , Welcome!, 2
 OnMessage(0x44, "")
@@ -49,10 +102,6 @@ OnMsgBox() {
   }
 }
 
-; ------------------------------------------------------------------------------
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-SetCapsLockState, AlwaysOff
-
 
 ; HELP FILE
 CapsLock & F1::
@@ -60,10 +109,18 @@ CapsLock & F1::
     Return
 ;C:\Users\Rob Acer Aspire 3>"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --app="C:\Users\Rob Acer Aspire 3\Documents\GitHub\auto-hot-key\keyboardfonts.html"
 
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
+SetCapsLockState, AlwaysOff
+
+
 ;CapsLock & Tab:: AltTab
+
 ;  h::AltTabMenu
 
-; ----------------------Navigation Keys-----------------------------------------
+
+
+
 
 
 CapsLock & i::
@@ -221,9 +278,10 @@ return
 ; ^#`;::Send, ^{end} ; thats how you send a semi colon
 ; ^#`;::Send, ^{end} ; thats how you send a semi colon
 
-; ----------------------Other Keys----------------------------------------------
+
 CapsLock & BS::Send,{Del}
 CapsLock & F4::Send,!{F4}
+
 
 CapsLock & Escape::
   {
@@ -231,7 +289,8 @@ CapsLock & Escape::
     Run, taskmgr,, Min   ; run taskmanager
   }
 
-  ; ----------------------Remap Control Key----------------------------------------------
+!y::Run, taskmgr,, Min
+
 
 CapsLock & s::Send ^s   ; save
 CapsLock & x::Send ^x
@@ -256,25 +315,17 @@ CapsLock & d::Send #d   ; windows desktop toggle.
 CapsLock & f::Send ^f   ; find
 
 
-; ----------------------Other Functions-----------------------------------------
-
 ; date and time insert
 CapsLock & /::
 FormatTime, time, A_now, ddd d-MMM-yy hh:mm tt
 send %time%
 return
 
-; ----------------------Symbols-------------------------------------------------
 
-
-
-; ----------------------Other Apps Quick Launch---------------------------------
-
+; symbols
 
 CapsLock & 1::Run, http://www.google.com ;
 
-
-; ----------------------Media Functions-----------------------------------------
 
 CapsLock & Up::Send {Volume_Up}
 CapsLock & Down::Send {Volume_Down}
@@ -284,16 +335,18 @@ CapsLock & RShift::Send {Media_Play_Pause}
 
 
 
+
 CapsLock & \::Send {Enter}
+
 ; convient Enter on Notebook
 CapsLock & Space::Send {Enter}
+
 ; CapsLock by itself is |ENTER
 ; NOT A GOOD IDEA CapsLock::Send {Enter}
+
 ; two fast CapsLock is enter
 lastShift := 0
 
-
-; ----------------------Double Click-------------------------------------------------
 
 ;example of double click
 $Capslock::
@@ -306,14 +359,18 @@ return
 
 
 ;Prevents CapsState-Shifting
+
+;CapsLock & Space::Send,{Space}
+
 *Capslock::SetCapsLockState, AlwaysOff
 
 ; this was causing all the trouble, so remove it+Capslock::SetCapsLockState, On
+
+
 CapsLock & PrintScreen::LaunchSnippingTool()
 
 
-; ----------------------HotStrings----------------------------------------------
-
+; ***** HOTSTRINGS *****************
 
 ::btw::
 MsgBox You typed "btw".
@@ -326,6 +383,7 @@ return
 :*:`;copy::{ASC 0169}
 :*:`;up::{U+2192}
 :*:`;down::{U+2193}
+
 
 :*:.today::  ; This hotstring replaces "]d" with the current date and time via the commands below.
 ;FormatTime, CurrentDateTime,, M/d/yyyy h:mm tt  ; It will look like 9/1/2005 3:53 PM
@@ -342,8 +400,6 @@ By default, the hard carriage return (Enter) between the previous line and this 
 See continuation section for how to change these default behaviors.
 )
 
-; ----------------------Snipiping Tool------------------------------------------
-
 LaunchSnippingTool()
 {
 	IfWinExist , Snipping Tool
@@ -356,9 +412,17 @@ LaunchSnippingTool()
 		WinActivate , Snipping Tool
 		Send ^+n
 	}
+
 }
 
-; ----------------------Search for Google-------------------------------------------------
+
+/*
+
+Rob McCormack's mods
+
+*/
+
+; search google for selected text.
 CapsLock & g::
 {
 ; Send, ^c
@@ -366,6 +430,9 @@ Send, {ctrl down}c{ctrl up} ; More secure way to Copy things
 Sleep 50
 
 StringLen, Length, Clipboard
+
+;MsgBox, You clipboard "%Length%"
+
 if (Length < 4)
     Clipboard := ""
 ;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]
@@ -381,8 +448,8 @@ Run, http://www.google.com/search?q=%OutputVar%
 Return
 }
 
-; ------------------------------------------------------------------------------
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                                      ;;
 ;; KDE-Style Alt-Grab Window Move Convenience Script    ;;
 ;;                                                      ;;
