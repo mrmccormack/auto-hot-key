@@ -79,10 +79,10 @@ else
 return
 
 CapsLock & j::
-  if getkeystate("Shift") = 0
-    Send,{left}
-  else
-    Send,+{left}
+if getkeystate("Shift") = 0
+  Send,{left}
+else
+  Send,+{left}
 return
 
 CapsLock & k::
@@ -107,100 +107,57 @@ else
     Send,+^{Home}
 return
 
-
 ; > for END, very end
 CapsLock & .::
-
-       if getkeystate("Shift") = 0
-
-               Send,^{End}
-
-       else
-
-               Send,+^{End}
-
+if getkeystate("Shift") = 0
+  Send,^{End}
+else
+  Send,+^{End
 return
 
 
 
 CapsLock & 8::
-
-       if getkeystate("Shift") = 0
-
-               Send,^{Up}
-
-       else
-
-               Send,+^{Up}
-
+if getkeystate("Shift") = 0
+  Send,^{Up}
+else
+  Send,+^{Up}
 return
-
-
 
 CapsLock & u::
-
-       if getkeystate("Shift") = 0
-
-               Send,{PgUp}
-
-       else
-
-               Send,+{PgUp}
-
+if getkeystate("Shift") = 0
+  Send,{PgUp}
+else
+   Send,+{PgUp}
 return
-
-
 
 CapsLock & o::
-
-       if getkeystate("Shift") = 0
-
-               Send,{PgDn}
-
-       else
-
-               Send,+{PgDn}
-
+if getkeystate("Shift") = 0
+  Send,{PgDn}
+else
+  Send,+{PgDn}
 return
 
-
-
 CapsLock & h::
-
-       if getkeystate("Shift") = 0
-
-               Send,{Home}
-
-       else
-
-               Send,+{Home}
-
+if getkeystate("Shift") = 0
+  Send,{Home}
+else
+  Send,+{Home}
 return
 
 CapsLock & `;::   ;     ; thats how you send a semi colon
-
-
-       if getkeystate("Shift") = 0
-
-               Send,{End}
-
-       else
-
-               Send,+{End}
-
+if getkeystate("Shift") = 0
+  Send,{End}
+else
+  Send,+{End}
 return
 
 
 CapsLock & '::
-
-       if getkeystate("Shift") = 0
-
-               Send,^{End}
-
-       else
-
-               Send,+^{End}
-
+if getkeystate("Shift") = 0
+  Send,^{End}
+else
+  Send,+^{End}
 return
 
 ; ----------------------Other Keys----------------------------------------------
@@ -219,27 +176,19 @@ CapsLock & s::Send ^s   ; save
 CapsLock & x::Send ^x
 CapsLock & w::Send ^w
 CapsLock & r::Send ^r
-
 CapsLock & c::Send ^c
-
 CapsLock & v::Send ^v
 CapsLock & z::Send ^z
 CapsLock & y::Send ^y  ; redo in some programs.
-
-; maybe add a kehy to select all copy and paste ??? not sure
 CapsLock & a::Send ^a
-
 CapsLock & t::Send ^t   ; just like Ctrl-tab for New Tabss
 CapsLock & n::Send ^n   ; New Documnet
-
 CapsLock & m::Send #m   ; windows min.
 CapsLock & e::Send #e   ; windows min.
 CapsLock & d::Send #d   ; windows desktop toggle.
 CapsLock & f::Send ^f   ; find
 
-
 ; ----------------------Other Functions-----------------------------------------
-
 ; date and time insert
 CapsLock & /::
 FormatTime, time, A_now, ddd d-MMM-yy hh:mm tt
@@ -252,9 +201,7 @@ return
 
 ; ----------------------Other Apps Quick Launch---------------------------------
 
-
 CapsLock & 1::Run, http://www.google.com ;
-
 
 ; ----------------------Media Functions-----------------------------------------
 
@@ -278,12 +225,11 @@ lastShift := 0
 ;example of double click
 $Capslock::
 if ((A_TickCount - lastShift) <= 250)
-	Send {Enter}
+  Send {Enter}
 else
-	Send {Shift}
+  Send {Shift}
 lastShift := A_TickCount
 return
-
 
 ;Prevents CapsState-Shifting
 *Capslock::SetCapsLockState, AlwaysOff
@@ -324,55 +270,51 @@ See continuation section for how to change these default behaviors.
 
 LaunchSnippingTool()
 {
-	IfWinExist , Snipping Tool
-	{
-		WinActivate , Snipping Tool
-		Send ^+n
-	} else {
-	  Run, C:\Windows\explorer.exe C:\Windows\system32\SnippingTool.exe
-		WinWait , Snipping Tool
-		WinActivate , Snipping Tool
-		Send ^+n
-	}
+  IfWinExist , Snipping Tool
+  {
+    WinActivate , Snipping Tool
+    Send ^+n
+  } else {
+    Run, C:\Windows\explorer.exe C:\Windows\system32\SnippingTool.exe
+    WinWait , Snipping Tool
+    WinActivate , Snipping Tool
+    Send ^+n
+  }
 }
 
 ; ----------------------Search for Google-------------------------------------------------
 CapsLock & g::
 {
-; Send, ^c
-Send, {ctrl down}c{ctrl up} ; More secure way to Copy things
-Sleep 50
+  ; Send, ^c
+  Send, {ctrl down}c{ctrl up} ; More secure way to Copy things
+  Sleep 50
 
-StringLen, Length, Clipboard
-if (Length < 4)
-    Clipboard := ""
-;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]
-InputBox, OutputVar, Jiffy Keys, Add to clipboard contents`nTIP: add .. to search last year `n`n %Clipboard%, , , , , , , ,%Clipboard%
-if ErrorLevel
+  StringLen, Length, Clipboard
+  if (Length < 4)
+      Clipboard := ""
+  ;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]
+  InputBox, OutputVar, Jiffy Keys, Add to clipboard contents`nTIP: add .. to search last year `n`n %Clipboard%, , , , , , , ,%Clipboard%
+  if ErrorLevel
     ;MsgBox, CANCEL was pressed.
     Return
 
 
+  Word := Trim(Clipboard)
 
-Word := Trim(Clipboard)
+  ;Word := StrReplace(Word, "`r`n")
+  ; search last year https://supple.com.au/tools/google-advanced-search-operators/
+  ; https://www.google.com.au/search?q=star+wars&tbs=qdr:y
 
-;Word := StrReplace(Word, "`r`n")
+  datetoken := ".."
+  If InStr(OutputVar, datetoken)
+    {
+      searchstring:= StrReplace(OutputVar, datetoken)
+      Run, http://www.google.com/search?q=%searchstring%&tbs=qdr:y
+    }
+  Else
+    Run, http://www.google.com/search?q=%OutputVar%
 
-; search last year https://supple.com.au/tools/google-advanced-search-operators/
-; https://www.google.com.au/search?q=star+wars&tbs=qdr:y
-
-;OutputVar := "Starwars vader zz!"
-datetoken := ".."
-If InStr(OutputVar, datetoken)
-  {
-    searchstring:= StrReplace(OutputVar, datetoken)
-    Run, http://www.google.com/search?q=%searchstring%&tbs=qdr:y
-  }
-Else
-  Run, http://www.google.com/search?q=%OutputVar%
-
-
-Return
+  Return
 }
 
 ; ------------------------------------------------------------------------------
