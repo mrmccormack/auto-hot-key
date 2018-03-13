@@ -2,8 +2,11 @@
 --------------------------- JiffyKeys-------------------------------------------
 --------------------------------------------------------------------------------
              CapsLock for navigation and SetCapsLockState
-
-Symbol	Description
+--------------------------------------------------------------------------------
+# HELP Files
+- Press CapsLock + F1 for all Keys
+___________________
+# Symbol	Description
 !n::Run Notepad ; this means Alt+n
 ^n::Run Notepad ; this means Ctrl+n
 +n::Run Notepad ; this means Shift+n
@@ -11,6 +14,7 @@ Symbol	Description
 
 &	An ampersand may be used between any two keys or mouse buttons to combine them into a custom hotkey.
 
+_______________
  # ROB TO DO:
 - add a button to MsgBox to search google within last year
 - have app switcher , like CapsLock + tab - be Alt-Tab
@@ -18,14 +22,14 @@ Symbol	Description
 - httplifehacker.com5277383use-caps-lock-for-hand+friendly-text-navigation
 - Originally written by Philipp Otto, Germany
 
-HELP Files
-- Press CapsLock + F1 for all Keys
+
 */
 ;-------------------------------------------------------------------------------
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 
+version:=0.1
 ; this changes the tray icon to a little keyboard!
 Menu, Tray, Icon, jiffykeys.ico
 ;SoundBeep  ; Play the default pitch and duration.
@@ -34,7 +38,7 @@ SoundPlay *-1  ; Simple beep. If the sound card is not available, the sound is g
 
 ; Splash Screen
 OnMessage(0x44, "OnMsgBox")
-MsgBox 0x40080, Jiffy Keys , Welcome! `n version: 0.1, 2
+MsgBox 0x40080, Jiffy Keys , Welcome! `n`n`nversion: %version%, 2
 OnMessage(0x44, "")
 
 IfMsgBox Timeout, {
