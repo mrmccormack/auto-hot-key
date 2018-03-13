@@ -228,6 +228,7 @@ return
 ; use of semicolons for short cut keys
 :*:`;ram::rob.a.mccormack@gmail.com
 :*:`;rm::Rob McCormack
+:*:`;tb::Thunder Bay
 :*:`;rpc::ReadPlease Corporation
 :*:`;ty::Thanks for your email.
 :*:`;copy::{ASC 0169}
