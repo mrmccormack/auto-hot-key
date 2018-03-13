@@ -347,15 +347,31 @@ StringLen, Length, Clipboard
 if (Length < 4)
     Clipboard := ""
 ;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]
-InputBox, OutputVar, Jiffy Keys, Add to clipboard contents `n %Clipboard%, , , , , , , ,%Clipboard%
+InputBox, OutputVar, Jiffy Keys, Add to clipboard contents`nTIP: add .. to search last year `n`n %Clipboard%, , , , , , , ,%Clipboard%
 if ErrorLevel
     ;MsgBox, CANCEL was pressed.
     Return
-else
-    ;MsgBox, You entered "%OutputVar%"
+
+
 
 Word := Trim(Clipboard)
-Run, http://www.google.com/search?q=%OutputVar%
+
+;Word := StrReplace(Word, "`r`n")
+
+; search last year https://supple.com.au/tools/google-advanced-search-operators/
+; https://www.google.com.au/search?q=star+wars&tbs=qdr:y
+
+;OutputVar := "Starwars vader zz!"
+datetoken := ".."
+If InStr(OutputVar, datetoken)
+  {
+    searchstring:= StrReplace(OutputVar, datetoken)
+    Run, http://www.google.com/search?q=%searchstring%&tbs=qdr:y
+  }
+Else
+  Run, http://www.google.com/search?q=%OutputVar%
+
+
 Return
 }
 
