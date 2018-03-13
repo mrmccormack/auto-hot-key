@@ -227,13 +227,14 @@ return
 
 ; use of semicolons for short cut keys
 :*:`;ram::rob.a.mccormack@gmail.com
+:*:`;rm::Rob McCormack
 :*:`;rpc::ReadPlease Corporation
 :*:`;ty::Thanks for your email.
 :*:`;copy::{ASC 0169}
 :*:`;up::{U+2192}
 :*:`;down::{U+2193}
 
-:*:.today::  ; This hotstring replaces "]d" with the current date and time via the commands below.
+:*:`;today::  ; current date and time
 ;FormatTime, CurrentDateTime,, M/d/yyyy h:mm tt  ; It will look like 9/1/2005 3:53 PM
 FormatTime, CurrentDateTime, A_now, ddd d-MMM-yy hh:mm tt
 SendInput %CurrentDateTime%
