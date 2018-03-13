@@ -82,31 +82,28 @@ CapsLock & j::
 return
 
 CapsLock & k::
-  if getkeystate("Shift") = 0
-    Send,{Down}
-  else
-    Send,+{Down}
+if getkeystate("Shift") = 0
+  Send,{Down}
+else
+  Send,+{Down}
 return
 
 CapsLock & l::
-  if getkeystate("Shift") = 0
-    Send,{Right}
-  else
-    Send,+{Right}
+if getkeystate("Shift") = 0
+  Send,{Right}
+else
+  Send,+{Right}
 return
 
 ; < for HOME, very top
 CapsLock & ,::
-
-       if getkeystate("Shift") = 0
-
-               Send,^{Home}
-
-       else
-
-               Send,+^{Home}
-
+if getkeystate("Shift") = 0
+    Send,^{Home}
+else
+    Send,+^{Home}
 return
+
+
 ; > for END, very end
 CapsLock & .::
 
@@ -263,8 +260,6 @@ CapsLock & Left::Send {Media_Prev}
 CapsLock & Right::Send {Media_Next}
 CapsLock & RShift::Send {Media_Play_Pause}
 
-
-
 CapsLock & \::Send {Enter}
 ; convient Enter on Notebook
 CapsLock & Space::Send {Enter}
@@ -292,9 +287,7 @@ return
 ; this was causing all the trouble, so remove it+Capslock::SetCapsLockState, On
 CapsLock & PrintScreen::LaunchSnippingTool()
 
-
 ; ----------------------HotStrings----------------------------------------------
-
 
 ::btw::
 MsgBox You typed "btw".
