@@ -290,7 +290,7 @@ CapsLock & g::
   ; search last year https://supple.com.au/tools/google-advanced-search-operators/
   ; https://www.google.com.au/search?q=star+wars&tbs=qdr:y
 
-  datetoken := ".."
+  datetoken := ";;"
   If InStr(OutputVar, datetoken)
     {
       searchstring:= StrReplace(OutputVar, datetoken)
