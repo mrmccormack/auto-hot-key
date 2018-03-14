@@ -227,6 +227,7 @@ return
 
 ; use of semicolons for short cut keys
 :*:`;ram::rob.a.mccormack@gmail.com
+:*:`;wil::What I Learned Document
 :*:`;rm::Rob McCormack
 :*:`;tb::Thunder Bay
 :*:`;rpc::ReadPlease Corporation
