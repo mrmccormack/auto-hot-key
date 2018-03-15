@@ -277,8 +277,8 @@ CapsLock & g::
   StringLen, Length, Clipboard
   if (Length < 4)
       Clipboard := ""
-  ;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default]
-  InputBox, OutputVar, Jiffy Keys, Add to clipboard contents`nTIP: add .. to search last year `n`n %Clipboard%, , , , , , , ,%Clipboard%
+  ;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y,, Timeout, Default]
+  InputBox, OutputVar, Jiffy Keys, Add to selection`nTIP: `n`;`; to search last year `n:: search StackOverFlow, , , , , , , ,%Clipboard%
   if ErrorLevel
     ;MsgBox, CANCEL was pressed.
     Return
@@ -295,11 +295,29 @@ CapsLock & g::
     {
       searchstring:= StrReplace(OutputVar, datetoken)
       Run, http://www.google.com/search?q=%searchstring%&tbs=qdr:y
+      Return
     }
-  Else
+
+    datetoken := "::"
+    If InStr(OutputVar, datetoken)
+      {
+        searchstring:= StrReplace(OutputVar, datetoken)
+        Run, https://stackoverflow.com/search?q==%searchstring%
+        Return
+      }
+
+
     Run, http://www.google.com/search?q=%OutputVar%
 
   Return
+
+
+
+
+
+
+
+
 }
 
 ; -------------------------Windows ---------------------------------------------
