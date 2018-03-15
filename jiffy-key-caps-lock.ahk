@@ -3,6 +3,8 @@
 --------------------------------------------------------------------------------
              CapsLock for navigation and SetCapsLockState
 --------------------------------------------------------------------------------
+
+???  add calculator... ^a::Run calc.exe
 # HELP Files
 - Press CapsLock + F1 for all Keys
 ___________________
@@ -147,6 +149,7 @@ return
 ; ----------------------Other Keys----------------------------------------------
 CapsLock & BS::Send,{Del}
 CapsLock & F4::Send,!{F4}  ; Alt-F4 close
+CapsLock & NumLock::run calc.exe
 
 CapsLock & Escape::
   {
