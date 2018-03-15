@@ -302,7 +302,7 @@ CapsLock & g::
     If InStr(OutputVar, datetoken)
       {
         searchstring:= StrReplace(OutputVar, datetoken)
-        Run, https://stackoverflow.com/search?q==%searchstring%
+        Run, https://stackoverflow.com/search?q=%searchstring%
         Return
       }
 
