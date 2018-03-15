@@ -278,7 +278,7 @@ CapsLock & g::
   if (Length < 4)
       Clipboard := ""
   ;InputBox, OutputVar [, Title, Prompt, HIDE, Width, Height, X, Y,, Timeout, Default]
-  InputBox, OutputVar, Jiffy Keys, Add to selection:`n;`; to search last year on Google `n:: search StackOverFlow, , , , , , , ,%Clipboard%
+  InputBox, OutputVar, Jiffy Keys, Add to selection:`n;`; to search last year on Google `n:: search StackOverFlow`nvv search videos, , , , , , , ,%Clipboard%
   if ErrorLevel
     ;MsgBox, CANCEL was pressed.
     Return
