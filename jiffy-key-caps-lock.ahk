@@ -294,20 +294,28 @@ CapsLock & g::
   If InStr(OutputVar, datetoken)
     {
       searchstring:= StrReplace(OutputVar, datetoken)
-      Run, http://www.google.com/search?q=%searchstring%&tbs=qdr:y
+      Run, http://www.google.com/search?num=30&q=%searchstring%&tbs=qdr:y
       Return
     }
+
+    datetoken := "vv"
+    If InStr(OutputVar, datetoken)
+      {
+        searchstring:= StrReplace(OutputVar, datetoken)
+        Run, http://www.google.com/search?tbm=vid&num=30&q=%searchstring%&tbs=qdr:y
+        Return
+      }
 
     datetoken := "::"
     If InStr(OutputVar, datetoken)
       {
         searchstring:= StrReplace(OutputVar, datetoken)
-        Run, https://stackoverflow.com/search?q=%searchstring%
+        Run, https://stackoverflow.com/search?num=30&q=%searchstring%
         Return
       }
 
 
-    Run, http://www.google.com/search?q=%OutputVar%
+    Run, http://www.google.com/search?num=30&q=%OutputVar%
 
   Return
 
